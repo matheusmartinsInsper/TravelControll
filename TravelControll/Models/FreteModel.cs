@@ -9,13 +9,15 @@ namespace TravelControll.Models
     public class FreteModel
     {
         [Key]
-        public int id_frete { get; set; }
+        public int? Id { get; set; }
         public string origem { get; set; }
         public string destino { get; set; }
         public DateTime data_entrega { get; set; }
         public int id_empresa { get; set; }
         public int? id_motorista { get; set; }
         [JsonIgnore]
-        public virtual UsuarioModel UsuarioModel { get; set; }
+        public virtual UsuarioModel? UsuarioModel { get; set; }
+       // public virtual List<VeiculosFretes> VeiculosFretes { get;} = new();
+        public virtual List<VeiculoModel>? veiculo { get; set; }
     }
 }

@@ -6,6 +6,9 @@ namespace TravelControll.Repositories.Interfaces
     {
         Task<List<FreteModel>> ListaFretesUsuario(int id);
         Task<FreteModel> AdicionarFrete(FreteModel frete);
-        Task<FreteModel> AtualizaFrete(FreteModel frete, int idFrete); 
+        Task<FreteModel> AtualizaFrete(FreteModel frete, int idFrete);
+        Task<Response> DeletarFrete(int idFrete);
+
+        Task<FreteModel> BuscaFretePorId(int idFrete);
     }
 }

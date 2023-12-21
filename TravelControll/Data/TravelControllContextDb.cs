@@ -27,7 +27,8 @@ namespace TravelControll.Data
         {
             ModelBuilder.ApplyConfiguration( new MappingFrete());
             ModelBuilder.ApplyConfiguration(new MappingUsuario());
-            
+            ModelBuilder.ApplyConfiguration(new MappingVeiculo());
+           // ModelBuilder.ApplyConfiguration(new MappingVeiculoFrete());
         }
 
     }

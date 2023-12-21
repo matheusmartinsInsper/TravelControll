@@ -32,7 +32,6 @@ namespace TravelControll.Controllers
         }
         [HttpGet("especifico")]
 
-
         public async Task<ActionResult<UsuarioModel>> BuscarUsuarioEspecífico()
         {
             int idUsuario = int.Parse(Request.Query["id"]);

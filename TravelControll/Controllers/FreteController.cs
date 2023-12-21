@@ -14,6 +14,7 @@ namespace TravelControll.Controllers
         {
             _repo = repo;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<FreteModel>>> ListarFretesUsuario()
         {
@@ -21,5 +22,20 @@ namespace TravelControll.Controllers
             List<FreteModel> fretes = await _repo.ListaFretesUsuario(idUsuario);
             return Ok(fretes);
         }
+        [HttpDelete]
+        public async Task<ActionResult<Response>> ApagarFrete()
+        {
+           // int idUsuario = int.Parse(Request.Query["id"]);
+            int idFrete = int.Parse(Request.Query["idFrete"]);
+            var resp = await _repo.DeletarFrete(idFrete);
+            return Ok(resp);
+        }
+        [HttpPost]
+        public async Task<ActionResult<FreteModel>> AdicionarFrete([FromBody] FreteModel Frete)
+        {
+            FreteModel frete = await _repo.AdicionarFrete(Frete);
+            return Ok(frete);
+        }
+       
     }
 }

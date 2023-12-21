@@ -13,6 +13,6 @@ namespace TravelControll.Models
         public string? senha { get; set; }
         public string? type_usuario { get; set; }
         public string? nome { get; set; }
-        public virtual List<FreteModel> fretes { get; set; }
+        public virtual List<FreteModel>? fretes { get; set; }
     }
 }

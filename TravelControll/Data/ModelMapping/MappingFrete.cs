@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Hosting;
 using TravelControll.Models;
 
 namespace TravelControll.Data.ModelMapping
@@ -8,11 +9,18 @@ namespace TravelControll.Data.ModelMapping
     {
         public void Configure(EntityTypeBuilder<FreteModel> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.HasOne(x=>x.UsuarioModel)
                 .WithMany(x=>x.fretes)
                 .HasForeignKey(x=>x.id_empresa)
                 .HasPrincipalKey(x => x.id_usuario)
-                .OnDelete(DeleteBehavior.Restrict);      
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(x => x.veiculo)
+                .WithMany(x => x.frete)
+                .UsingEntity("veiculofrete");
+
         }
     }
 }
