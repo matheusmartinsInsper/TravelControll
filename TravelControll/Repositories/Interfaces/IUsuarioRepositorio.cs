@@ -8,6 +8,6 @@ namespace TravelControll.Repositories.Interfaces
         Task<UsuarioModel> BuscarPorID(int id);
         Task<UsuarioModel> AdicionarUsuario(UsuarioModel usuario);
         Task<UsuarioModel> AtualizaUsuario(UsuarioModel usuario, int id);
-        Task<bool> Apagar(int id);
+        Task<UsuarioModel> Apagar(int id);
     }
 }

@@ -9,7 +9,7 @@ namespace TravelControll.Data.ModelMapping
     {
         public void Configure(EntityTypeBuilder<FreteModel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.id);
 
             builder.HasOne(x=>x.UsuarioModel)
                 .WithMany(x=>x.fretes)
@@ -21,6 +21,9 @@ namespace TravelControll.Data.ModelMapping
                 .WithMany(x => x.frete)
                 .UsingEntity("veiculofrete");
 
+            builder.HasMany(x => x.carga)
+                .WithMany(x => x.frete)
+                .UsingEntity(j=>j.ToTable("cargafrete"));
         }
     }
 }

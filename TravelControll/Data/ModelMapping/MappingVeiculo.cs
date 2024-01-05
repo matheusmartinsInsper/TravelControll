@@ -8,7 +8,7 @@ namespace TravelControll.Data.ModelMapping
     {
         public void Configure(EntityTypeBuilder<VeiculoModel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.id);
 
             builder.HasMany(x => x.frete)
                 .WithMany(x => x.veiculo);

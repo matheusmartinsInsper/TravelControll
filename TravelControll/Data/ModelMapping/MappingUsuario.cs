@@ -11,6 +11,9 @@ namespace TravelControll.Data.ModelMapping
             builder.HasMany(x=>x.fretes)
                 .WithOne(x=>x.UsuarioModel)
                 .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasMany(x=>x.cargas)
+            //    .WithOne()
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

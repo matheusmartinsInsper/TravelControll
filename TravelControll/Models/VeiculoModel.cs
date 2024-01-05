@@ -8,7 +8,7 @@ namespace TravelControll.Models
     public class VeiculoModel
     {
         [Key]
-        public int? Id { get; set; }
+        public int? id { get; set; }
         public int id_usuario { get; set; }
         public string nome_veiculo { get; set; }
         public int peso_veiculo { get; set; }

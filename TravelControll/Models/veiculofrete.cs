@@ -6,9 +6,9 @@ namespace TravelControll.Models
 {
     public class veiculofrete
     {       
-        public int veiculoId { get; set; }
+        public int veiculoid { get; set; }
        
-        public int freteId { get; set; }
+        public int freteid { get; set; }
         [JsonIgnore]
         public virtual FreteModel FreteModel { get; set; } = null!;
         [JsonIgnore]

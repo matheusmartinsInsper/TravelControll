@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore.Proxies;
 namespace TravelControll.Data
 {
     public class TravelControllContextDb : DbContext
-    {
-        
-
+    {       
         public TravelControllContextDb(DbContextOptions<TravelControllContextDb> options) : base(options)
         {
         }
         public DbSet<UsuarioModel>? User { get; set; }
         public DbSet<FreteModel>? Frete { get; set; }
-        
-        public DbSet<FreteModel> Fretes { get; set ; }
+
+        public DbSet<CargaModel>? Carga { get; set; }
+        public DbSet<RelatoryQuantity>? Relatorio { get; set; }
+        public List<RelatoryQuantity> GerarRelatorioDeQuantidade(int id)
+        {
+            return Relatorio.FromSqlRaw($"SELECT * FROM reportgenerator({id})").ToList();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies(); // Habilita a carga preguiçosa
@@ -28,7 +31,8 @@ namespace TravelControll.Data
             ModelBuilder.ApplyConfiguration( new MappingFrete());
             ModelBuilder.ApplyConfiguration(new MappingUsuario());
             ModelBuilder.ApplyConfiguration(new MappingVeiculo());
-           // ModelBuilder.ApplyConfiguration(new MappingVeiculoFrete());
+            ModelBuilder.ApplyConfiguration(new MappingCarga());
+            ModelBuilder.ApplyConfiguration(new MappingRelatory());
         }
 
     }

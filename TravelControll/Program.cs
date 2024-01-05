@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TravelControll.Data;
+using TravelControll.Models;
 using TravelControll.Repositories;
 using TravelControll.Repositories.Interfaces;
+using TravelControll.Services;
+using TravelControll.Services.Interfaces;
 
 namespace TravelControll
 {
@@ -25,6 +28,7 @@ namespace TravelControll
             //Configurando injeção de dependencia
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             builder.Services.AddScoped<IFreteRepositorio, FreteRepositorio>();
+            builder.Services.AddScoped <IRelatory<RelatoryQuantity>, GeneratorRelatoryQuantity>();
 
             var app = builder.Build();
 
