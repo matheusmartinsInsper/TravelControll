@@ -18,10 +18,26 @@ namespace TravelControll.Controllers
             _repo = repo;
         }
         [HttpGet]
-        public async Task<ActionResult<List<FreteModel>>> ListarFretes()
+        public async Task<ActionResult<Response<List<FreteModel>>>> ListarFretes()
         {
-            List<FreteModel> fretes = await _repo.ListaFretes();
-            return Ok(fretes);
+            Response<List<FreteModel>> resposta = new Response<List<FreteModel>>()
+            {
+                status = "Ok",
+                message = "Fretes disponiveis",
+                data = null
+            };
+            try
+            {
+                List<FreteModel> fretes = await _repo.ListaFretes();
+                resposta.data= fretes;
+                return Ok(resposta);
+            }
+            catch(Exception ex)
+            {
+                resposta.status = "error";
+                resposta.message = new HandlerError().handlerErroMesage(ex);
+                return BadRequest(resposta);
+            }
         }
         [HttpGet("usuario")]
         public async Task<ActionResult<Response<List<FreteModel>>>> ListarFretesUsuario()
@@ -29,7 +45,7 @@ namespace TravelControll.Controllers
             Response<List<FreteModel>> resposta = new Response<List<FreteModel>>()
             {
                 status = "Ok",
-                message = "Fretes Disponiveis",
+                message = "Fretes disponiveis",
                 data = null
             };
             try
@@ -46,18 +62,63 @@ namespace TravelControll.Controllers
                 return BadRequest(resposta);
             }
         }
+        [HttpPut]
+        public async Task<ActionResult<Response<FreteModel>>> AtualizarFrete([FromBody] FreteModel frete)
+        {
+            Response<FreteModel> resposta = new Response<FreteModel>()
+            {
+                status = "ok",
+                message = "Frete atualizado",
+                data = null
+            };
+            try
+            {
+                int idFrete = int.Parse(Request.Query["id"]);
+                FreteModel freteAtualizado = await _repo.AtualizaFrete(frete,idFrete);
+                resposta.data = freteAtualizado;
+                return Ok(resposta);
+            }
+            catch (Exception ex)
+            {
+                resposta.status = "error";
+                resposta.message = new HandlerError().handlerErroMesage(ex);
+                return BadRequest(resposta);
+            }
+        }
+        [HttpPut("aceito")]
+        public async Task<ActionResult<Response<FreteModel>>> AtualizarFreteAceito([FromBody] FreteModel frete)
+        {
+            Response<FreteModel> resposta = new Response<FreteModel>()
+            {
+                status = "ok",
+                message = "Frete aceito com sucesso",
+                data = null
+            };
+            try
+            {
+                int idFrete = int.Parse(Request.Query["id"]);
+                FreteModel freteAtualizado = await _repo.AtualizaFreteAceito(frete,idFrete);
+                resposta.data = freteAtualizado;
+                return Ok(resposta);
+            }
+            catch (Exception ex)
+            {
+                resposta.status = "error";
+                resposta.message = new HandlerError().handlerErroMesage(ex);
+                return BadRequest(resposta);
+            }
+        }
         [HttpDelete]
         public async Task<ActionResult<Response<FreteModel>>> ApagarFrete()
         {
             Response<FreteModel> resposta = new Response<FreteModel>()
             {
                 status = "Ok",
-                message = "Frete Deletado com sucesso",
+                message = "Frete deletado com sucesso",
                 data = null
             };
             try
             {
-                int idUsuario = int.Parse(Request.Query["idUsuario"]);
                 int idFrete = int.Parse(Request.Query["idFrete"]);
                 var resp = await _repo.DeletarFrete(idFrete);
                 return Ok(resposta);

@@ -15,6 +15,7 @@ namespace TravelControll.Models
         public float? massa_carga { get; set; }
         [JsonIgnore]
         public virtual List<FreteModel>? frete { get; set; }
-
+        [JsonIgnore]
+        public virtual UsuarioModel? UsuarioModel { get; set; }
     }
 }

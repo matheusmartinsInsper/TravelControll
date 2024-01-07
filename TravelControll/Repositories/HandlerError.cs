@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using System.Drawing.Printing;
 using TravelControll.Repositories.Interfaces;
 
 namespace TravelControll.Repositories
@@ -14,6 +15,10 @@ namespace TravelControll.Repositories
                 {
                     string messageDetails = postgresException.MessageText;
                     return messageDetails;
+                }else if (Dbex.InnerException is ArgumentNullException nullexc)
+                {
+                    string messageNullex = nullexc.Message;
+                    return messageNullex;
                 }
             }
             string messageEx = exception.Message;
