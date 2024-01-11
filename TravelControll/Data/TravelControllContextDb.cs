@@ -16,6 +16,7 @@ namespace TravelControll.Data
         public DbSet<FreteModel>? Frete { get; set; }
         public DbSet<CargaModel>? Carga { get; set; }
         public DbSet<VeiculoModel>? Veiculo { get; set; }
+        public DbSet<veiculofrete>? VeiculoFrete { get; set; }
         public DbSet<RelatoryQuantity>? Relatorio { get; set; }
         public List<RelatoryQuantity> GerarRelatorioDeQuantidade(int id)
         {
@@ -33,7 +34,7 @@ namespace TravelControll.Data
             ModelBuilder.ApplyConfiguration(new MappingVeiculo());
             ModelBuilder.ApplyConfiguration(new MappingCarga());
             ModelBuilder.ApplyConfiguration(new MappingRelatory());
-            
+            ModelBuilder.ApplyConfiguration(new MappingVeiculoFrete());
         }
 
     }

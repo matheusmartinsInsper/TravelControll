@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using TravelControll.Data;
 using TravelControll.Models;
 using TravelControll.Repositories.Interfaces;
@@ -32,14 +33,30 @@ namespace TravelControll.Repositories
             return null;
         }
 
-        public Task<CargaModel> AtualizarCarga(CargaModel carga, int IdCarga)
+        public async Task<CargaModel> AtualizarCarga(CargaModel carga, int IdCarga)
         {
-            throw new NotImplementedException();
+            CargaModel cargaId = await BuscarCargaPorId(IdCarga);
+            if (cargaId != null)
+            {
+                Type tipoVeiculo = cargaId.GetType();
+                PropertyInfo[] propriedades = tipoVeiculo.GetProperties();
+                foreach (PropertyInfo prop in propriedades)
+                {
+                    if (prop.GetValue(carga) != null)
+                    {
+                       prop.SetValue(cargaId, prop.GetValue(carga));
+                    }
+                }
+                _context.Carga.Update(cargaId);
+                _context.SaveChanges();
+                return cargaId;
+            }
+            return null;
         }
 
-        public Task<CargaModel> BuscarCargaPorId(int IdCarga)
+        public async Task<CargaModel> BuscarCargaPorId(int IdCarga)
         {
-            return _context.Carga.FirstOrDefaultAsync(x => x.id == IdCarga);
+            return await _context.Carga.FirstOrDefaultAsync(x => x.id == IdCarga);
         }
 
         public async Task<List<CargaModel>> ListarCargasUsuario(int idUser)

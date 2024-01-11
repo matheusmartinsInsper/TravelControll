@@ -51,7 +51,7 @@ namespace TravelControll.Services.RelatoryService
                 worksheet.Cells[1, 2].Value = "IdEmpresa";
                 worksheet.Cells[1, 3].Value = "Status";
                 worksheet.Cells[1, 4].Value = "Quantidade";
-                if(dados != null)
+                if(dados.Count == 0)
                 {
                     for (int i = 0; i < dados.Count; i++)
                     {

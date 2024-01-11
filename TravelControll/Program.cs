@@ -35,6 +35,7 @@ namespace TravelControll
             builder.Services.AddScoped<IFreteRepositorio, FreteRepositorio>();
             builder.Services.AddScoped<IRelatory<RelatoryQuantity>, GeneratorRelatoryQuantity>();
             builder.Services.AddScoped<IVeiculoRepositorio, VeiculoRepositorio>();
+            builder.Services.AddScoped<ICargaRepositorio, CargaRepositorio>();
             builder.Services.AddSingleton<BackgroundRelatoryGenerator>();
 
             //var serviceProvider = new ServiceCollection()
